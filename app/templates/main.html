@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container py-4 animate__animated animate__fadeIn">
+    <div class="text-center mb-5">
+        <h1 class="display-5 fw-bold">
+            <i class="bi bi-code-square text-primary me-2"></i>Выберите язык программирования
+        </h1>
+        <p class="lead text-muted">Начните изучать музыку</p>
+    </div>
+
+    <div class="row g-4">
+        {% for lang in languages %}
+        <div class="col-md-4">
+            <a href="/language/{{ lang[0] }}" class="card language-card h-100 text-decoration-none text-white hover-scale animate__animated animate__fadeInUp" style="animation-delay: {{ loop.index * 0.1 }}s">
+                <div class="card-body text-center p-4">
+                    <div class="icon-wrapper bg-dark bg-opacity-50 rounded-circle p-3 mb-3 mx-auto" style="width: 70px; height: 70px;">
+                        <i class="bi bi-file-code-fill text-primary" style="font-size: 2rem;"></i>
+                    </div>
+                    <h3 class="h4 mb-2">{{ lang[1] }}</h3>
+                    <p class="text-muted mb-0">Начните изучение прямо сейчас</p>
+                </div>
+                <div class="card-footer bg-black bg-opacity-25 border-0 text-center py-3">
+                    <span class="badge bg-primary rounded-pill">Выбрать</span>
+                </div>
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

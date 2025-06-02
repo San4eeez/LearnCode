@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container py-4 animate__animated animate__fadeIn">
+    <div class="d-flex justify-content-between align-items-center mb-5">
+        <div>
+            <h1 class="display-5 fw-bold">
+                <i class="bi bi-journal-text text-primary me-2"></i>{{ topic_name }}
+            </h1>
+            <p class="lead text-muted">Уроки по выбранной теме</p>
+        </div>
+        <a href="/language/{{ language_id }}" class="btn btn-outline-secondary">
+
+            <i class="bi bi-arrow-left me-1"></i> Назад
+        </a>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-8 mx-auto">
+            <div class="accordion" id="lessonsAccordion">
+                {% for lesson in lessons %}
+                <div class="accordion-item border-0 mb-3 bg-dark bg-opacity-25 rounded-3 overflow-hidden animate__animated animate__fadeInUp" style="animation-delay: {{ loop.index * 0.1 }}s">
+                    <h2 class="accordion-header" id="heading{{ loop.index }}">
+                        <button class="accordion-button bg-dark bg-opacity-75 text-white collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{ loop.index }}" aria-expanded="false" aria-controls="collapse{{ loop.index }}">
+                            <i class="bi bi-file-earmark-text me-2 text-primary"></i>
+                                <div class="d-flex w-100 align-items-center">
+                                    <span class="fw-bold flex-grow-1">{{ lesson[0] }}</span>
+                                    <span class="badge bg-{% if lesson[3] == 'Легкий' %}success{% elif lesson[3] == 'Средний' %}warning{% else %}danger{% endif %}">
+                                        {{ lesson[3] }}
+                                    </span>
+                                </div>
+                        </button>
+                    </h2>
+                    <div id="collapse{{ loop.index }}" class="accordion-collapse collapse" aria-labelledby="heading{{ loop.index }}" data-bs-parent="#lessonsAccordion">
+                        <div class="accordion-body">
+                            <p class="mb-4">{{ lesson[1] }}</p>
+                            <div class="code-block mb-3">
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <small class="text-muted">Текст урока:</small>
+                                    <button class="btn btn-sm btn-outline-secondary copy-btn" data-clipboard-target="#code{{ loop.index }}">
+                                        <i class="bi bi-clipboard me-1"></i> Копировать
+                                    </button>
+                                </div>
+                                <pre id="code{{ loop.index }}" class="m-0"><code>{{ lesson[2] | e | replace('\\n', '\n') }}</code></pre>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
