@@ -31,19 +31,24 @@
                         </button>
                     </h2>
                     <div id="collapse{{ loop.index }}" class="accordion-collapse collapse" aria-labelledby="heading{{ loop.index }}" data-bs-parent="#lessonsAccordion">
-                        <div class="accordion-body">
-                            <p class="mb-4">{{ lesson[1] }}</p>
-                            <div class="code-block mb-3">
-                                <div class="d-flex justify-content-between align-items-center mb-2">
-                                    <small class="text-muted">Текст урока:</small>
-                                    <button class="btn btn-sm btn-outline-secondary copy-btn" data-clipboard-target="#code{{ loop.index }}">
-                                        <i class="bi bi-clipboard me-1"></i> Копировать
-                                    </button>
-                                </div>
-                                <pre id="code{{ loop.index }}" class="m-0"><code>{{ lesson[2] | e | replace('\\n', '\n') }}</code></pre>
-
-                            </div>
-                        </div>
+<div class="accordion-body">
+    <p class="mb-4">{{ lesson[1] }}</p>
+    <div class="code-block mb-3">
+        <div class="d-flex justify-content-between align-items-center mb-2">
+            <small class="text-muted">Текст урока:</small>
+            <button class="btn btn-sm btn-outline-secondary copy-btn" data-clipboard-target="#code{{ loop.index }}">
+                <i class="bi bi-clipboard me-1"></i> Копировать
+            </button>
+        </div>
+        <pre id="code{{ loop.index }}" class="m-0"><code>{{ lesson[2] | e | replace('\\n', '\n') }}</code></pre>
+    </div>
+<div class="video-block mb-3">
+    <div class="d-flex justify-content-between align-items-center mb-2">
+        <small class="text-muted">Видео урока:</small>
+    </div>
+    <a href="{{ lesson[4] }}" target="_blank" class="btn btn-primary">Смотреть видео</a>
+</div>
+</div>
                     </div>
                 </div>
                 {% endfor %}

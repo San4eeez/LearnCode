@@ -23,7 +23,7 @@ async def get_lessons(request: Request, topic_id: int, db: Database = Depends(ge
         return HTMLResponse(content="Тема не найдена", status_code=404)
 
     lessons = db.fetch_all(
-        "SELECT title, content, example_code, difficulty FROM lessons WHERE topic_id = %s",
+        "SELECT title, content, example_code, difficulty, video_link FROM lessons WHERE topic_id = %s",
         (topic_id,)
     )
 
@@ -33,4 +33,3 @@ async def get_lessons(request: Request, topic_id: int, db: Database = Depends(ge
         "topic_name": topic[0],  # name
         "language_id": topic[1],  # language_id
     })
-
